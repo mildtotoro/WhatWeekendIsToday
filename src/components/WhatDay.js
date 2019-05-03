@@ -19,23 +19,20 @@ class WhatDay extends Component {
     }
   }
 
-  calNumberByYear = (year) => {
+  calTotalDateByYear = (year) => {
     try{
       if(year < 1900) {
         return 0;
       }
-      if(
-        (year%100 ===0 && 400 === 0) ||
-        (year%4 === 0 && year%100 !== 0)
-      ) {
-          return 366+this.calNumberByYear(year-1);
-        } else {
-          return 365+this.calNumberByYear(year-1);
-        }
+      if(this.isYearLeap(year)) {
+        return 366+this.calTotalDateByYear(year-1);
+      } else {
+        return 365+this.calTotalDateByYear(year-1);
+      }
     } catch(e) {
-      console.error("error");
+      // for maximum loop
+      console.error("error", e);
     }
-    
   }
 
   isYearLeap(year = null) {
@@ -48,7 +45,7 @@ class WhatDay extends Component {
       ) 
   }
 
-  calDateByMonth = (m) => {
+  calTotalDateByMonth = (m) => {
     let day = 0;
     const feb = (this.isYearLeap)? 29 : 28;
     switch(m) {
@@ -107,8 +104,8 @@ class WhatDay extends Component {
       const date = parseInt(dates[2]);
       
       if(year >= 1900) {
-        const totalYear = this.calNumberByYear(year-1);
-        const totalMonth = this.calDateByMonth(month-1);
+        const totalYear = this.calTotalDateByYear(year-1);
+        const totalMonth = this.calTotalDateByMonth(month-1);
         const dateOfWeek = day[(totalMonth+totalYear+date) %7];
     
         this.setState({

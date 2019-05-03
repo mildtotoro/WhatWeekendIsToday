@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getTotalDateByYear, getTotalDateByMonth } from './date.js';
+import { getTotalDateByYear, getTotalDateByMonth } from '../lib/date.js';
 
 class WhatDay extends Component {
   constructor(props) {

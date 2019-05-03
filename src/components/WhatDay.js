@@ -37,7 +37,7 @@ class WhatDay extends Component {
 
   isYearLeap(year) {
     return (
-      (year % 100 === 0 && 400 === 0) ||
+      (year % 100 === 0 && year % 400 === 0) ||
       (year % 4 === 0 && year % 100 !== 0)
     )
   }
@@ -45,12 +45,10 @@ class WhatDay extends Component {
   getTotalDateByMonth = (m, year) => {
     let day = 0;
     const feb = (this.isYearLeap(year)) ? 29 : 28;
-    const dateByMonth = [0, 31, feb, 31, 30, 31, 30, 31, 31, 30, 30, 31]
-
+    const dateByMonth = [0, 31, feb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     for (let i = 0; i <= m; i++) {
       day = dateByMonth[i] + day;
     }
-
     return day;
   }
 
